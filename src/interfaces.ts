@@ -1,4 +1,3 @@
-import type { MenuSettingNameEnum } from "./menuSettings"
 
 export interface IMenuSetting {
     name: string,
@@ -6,6 +5,6 @@ export interface IMenuSetting {
 }
 
 export interface IGroupedMenuSetting {
-    name: MenuSettingNameEnum,
+    name: string,
     children: IMenuSetting[]
 }

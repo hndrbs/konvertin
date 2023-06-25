@@ -1,9 +1,9 @@
 ---
 import Layout from "../../layouts/Layout.astro";
-import { MenuSettingNameEnum } from "../../menuSettings";
+import Base64TextConverter from "../../react-pages/Base64TextConverter"
 ---
 
 
-<Layout title="base64 converter" activeMenu={MenuSettingNameEnum.base64}>
-    <p>text</p>
+<Layout title="base64 converter">
+    <Base64TextConverter client:load />
 </Layout>

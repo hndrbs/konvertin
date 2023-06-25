@@ -1,13 +1,13 @@
 ---
 import Menu from '../components/Menu.astro';
-import type { MenuSettingNameEnum } from '../menuSettings';
 
 export interface Props {
 	title: string,
-    activeMenu: MenuSettingNameEnum
+    hideMenu?: boolean
 }
 
-const { title, activeMenu } = Astro.props;
+const { title, hideMenu } = Astro.props;
+
 ---
 
 <!DOCTYPE html>
@@ -21,8 +21,12 @@ const { title, activeMenu } = Astro.props;
 		<title>{title}</title>
 	</head>
 	<body>
-        <Menu activeMenu={activeMenu} />
-		<slot />
+        {!hideMenu && <Menu />}
+        <main class="flex justify-center w-full">
+            <div class="w-full p-3">
+                <slot />
+            </div>
+        </main>
 	</body>
 </html>
 <style is:global>
@@ -32,7 +36,7 @@ const { title, activeMenu } = Astro.props;
 	}
 	html {
 		font-family: system-ui, sans-serif;
-		background-color: #F6F6F6;
+		background-color: #f0eaea;
 	}
 	code {
 		font-family: Menlo, Monaco, Lucida Console, Liberation Mono, DejaVu Sans Mono,

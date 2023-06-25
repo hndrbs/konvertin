@@ -1,16 +1,10 @@
 ---
-import { MenuSettingNameEnum, menuSettings } from '../menuSettings';
+import { menuSettings } from '../menuSettings';
 import type { IMenuSetting } from "../interfaces"
 import Collapsible from '../react-components/Collapsible';
 
 
-export interface Props {
-    activeMenu: MenuSettingNameEnum
-}
-
-const { activeMenu } = Astro.props
 const currentPath = Astro.url.pathname
-
 
 function isCurrentPage(menu: IMenuSetting) {
     return currentPath.toLocaleLowerCase() === menu.link.toLocaleLowerCase()
@@ -21,12 +15,12 @@ function isAnyOfMyChildrenActive(menus: IMenuSetting[]) {
 }
 
 const active = "text-white bg-orange-400 p-2 rounded"
-const inActive = "text-black border-orange-400 p-2 rounded"
+const inActive = "text-black bg-gray-100 border border-orange-400 p-2 rounded"
 
 ---
 
 
-<aside class="flex justify-center gap-3">
+<aside class="flex justify-center gap-3 pb-2">
     { menuSettings.map(menu => {
         if ("children" in menu) {
             return (
