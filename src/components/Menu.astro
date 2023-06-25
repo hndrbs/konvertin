@@ -1,0 +1,51 @@
+---
+import { MenuSettingNameEnum, menuSettings } from '../menuSettings';
+import type { IMenuSetting } from "../interfaces"
+import Collapsible from '../react-components/Collapsible';
+
+
+export interface Props {
+    activeMenu: MenuSettingNameEnum
+}
+
+const { activeMenu } = Astro.props
+const currentPath = Astro.url.pathname
+
+
+function isCurrentPage(menu: IMenuSetting) {
+    return currentPath.toLocaleLowerCase() === menu.link.toLocaleLowerCase()
+}
+
+function isAnyOfMyChildrenActive(menus: IMenuSetting[]) {
+    return menus.some(menu => isCurrentPage(menu))
+}
+
+const active = "text-white bg-orange-400 p-2 rounded"
+const inActive = "text-black border-orange-400 p-2 rounded"
+
+---
+
+
+<aside class="flex justify-center gap-3">
+    { menuSettings.map(menu => {
+        if ("children" in menu) {
+            return (
+                <Collapsible
+                    classNames={{
+                        text: isAnyOfMyChildrenActive(menu.children) ? active : inActive,
+                        children: "absolute w-48 flex flex-col gap-1 mt-2"
+                    }}
+                    text={menu.name} client:load>
+                    {
+                        menu.children.map((subMenu: IMenuSetting) => (
+                            <a href={subMenu.link} class={isCurrentPage(subMenu) ? active: inActive}>
+                                {subMenu.name}
+                            </a>))
+                    }
+                </Collapsible>
+            ) 
+        }
+
+        return <a class={isCurrentPage(menu) ? active: inActive} href={menu.link}>{menu.name}</a>
+    })}
+</aside>
