@@ -8,5 +8,5 @@ import tailwind from "@astrojs/tailwind";
 export default defineConfig({
   integrations: [react(), tailwind()],
   base: "/BasicTools",
-  compressHTML: true,
+//   compressHTML: true,
 });

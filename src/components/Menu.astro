@@ -16,6 +16,7 @@ function isAnyOfMyChildrenActive(menus: IMenuSetting[]) {
 
 const active = "text-white bg-orange-400 p-2 rounded"
 const inActive = "text-black bg-gray-100 border border-orange-400 p-2 rounded"
+const base = "/BasicTools"
 
 ---
 
@@ -32,7 +33,7 @@ const inActive = "text-black bg-gray-100 border border-orange-400 p-2 rounded"
                     text={menu.name} client:load>
                     {
                         menu.children.map((subMenu: IMenuSetting) => (
-                            <a href={subMenu.link} class={isCurrentPage(subMenu) ? active: inActive}>
+                            <a href={base + subMenu.link} class={isCurrentPage(subMenu) ? active: inActive}>
                                 {subMenu.name}
                             </a>))
                     }
@@ -40,6 +41,6 @@ const inActive = "text-black bg-gray-100 border border-orange-400 p-2 rounded"
             ) 
         }
 
-        return <a class={isCurrentPage(menu) ? active: inActive} href={menu.link}>{menu.name}</a>
+        return <a class={isCurrentPage(menu) ? active: inActive} href={base + menu.link}>{menu.name}</a>
     })}
 </aside>
