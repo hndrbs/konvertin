@@ -20,9 +20,9 @@ const { title, hideMenu } = Astro.props;
 		<meta name="generator" content={Astro.generator} />
 		<title>{title}</title>
 	</head>
-	<body>
-        {!hideMenu && <Menu />}
-        <main class="flex justify-center w-full">
+	<body class="flex">
+        {!hideMenu && <aside class="overflow-y-auto hidden md:inline h-screen max-h-screen w-60 p-2"><Menu /></aside>}
+        <main class="flex justify-center grow">
             <div class="w-full p-3">
                 <slot />
             </div>

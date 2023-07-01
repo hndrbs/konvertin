@@ -13,7 +13,6 @@ const base64Menu: IGroupedMenuSetting = {
 
 
 const regularMenu: IMenuSetting[] = [
-    { name: "Basic Auth" , link: "/coming-soon" },
     { name: "JWT", link: "/coming-soon" },
 ]
 

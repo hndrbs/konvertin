@@ -7,33 +7,36 @@ import Collapsible from '../react-components/Collapsible';
 const currentPath = Astro.url.pathname
 
 function isCurrentPage(menu: IMenuSetting) {
-    return currentPath.toLocaleLowerCase() === menu.link.toLocaleLowerCase()
+    return currentPath === base + menu.link
 }
 
 function isAnyOfMyChildrenActive(menus: IMenuSetting[]) {
     return menus.some(menu => isCurrentPage(menu))
 }
 
-const active = "text-white bg-orange-400 p-2 rounded"
-const inActive = "text-black bg-gray-100 border border-orange-400 p-2 rounded"
+const baseClass = "p-2 rounded m-2 block w-full "
+
+const active = baseClass + "text-white bg-orange-400"
+const inActive = baseClass + "text-black bg-gray-50"
+
 const base = "/BasicTools"
 
 ---
 
 
-<aside class="flex justify-center gap-3 pb-2">
+<div class=" bg-gray-100 w-full">
     { menuSettings.map(menu => {
         if ("children" in menu) {
             return (
                 <Collapsible
                     classNames={{
-                        text: isAnyOfMyChildrenActive(menu.children) ? active : inActive,
-                        children: "absolute w-48 flex flex-col gap-1 mt-2"
+                        text: (isAnyOfMyChildrenActive(menu.children) ? active: inActive) + " text-left",
+                        children: "absolute w-48 flex flex-col gap-1 bg-gray-50 left-10"
                     }}
                     text={menu.name} client:load>
                     {
                         menu.children.map((subMenu: IMenuSetting) => (
-                            <a href={base + subMenu.link} class={isCurrentPage(subMenu) ? active: inActive}>
+                            <a href={base + subMenu.link} class={"hover:text-white hover:bg-orange-400 " + (isCurrentPage(subMenu) ? active: inActive)}>
                                 {subMenu.name}
                             </a>))
                     }
@@ -43,4 +46,4 @@ const base = "/BasicTools"
 
         return <a class={isCurrentPage(menu) ? active: inActive} href={base + menu.link}>{menu.name}</a>
     })}
-</aside>
+</div>

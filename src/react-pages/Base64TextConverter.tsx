@@ -53,13 +53,13 @@ export default function Base64TextConverter() {
                 </span>
             </div>
             <div className="flex flex-col justify-center md:flex-row gap-3 w-full">
-                <div className="w-full md:w-1/3">
+                <div className="w-full md:w-1/2">
                     <ButtonGroupUtils refTarget={inputRef} buttonMembers={["clear"]} />
                     <textarea ref={inputRef} placeholder="your plain text here" 
                         className="w-full h-32 p-3"
                         onChange={onConvert}></textarea>
                 </div>
-                <div className="w-full md:w-1/3">
+                <div className="w-full md:w-1/2">
                     <ButtonGroupUtils refTarget={outputRef} buttonMembers={["copy"]}/>
                     <textarea ref={outputRef} className="w-full h-32 p-3" disabled></textarea>
                 </div>
