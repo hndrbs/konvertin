@@ -7,6 +7,8 @@ import { useState } from 'react';
 export default function Menu({ currentPath }: { currentPath: string } ) {
 
     const [isOpen, setIsOpen] = useState(false)
+
+    const base = "/BasicTools"
     
     function isCurrentPage(menu: IMenuSetting) {
         return currentPath === base + menu.link
@@ -20,7 +22,6 @@ export default function Menu({ currentPath }: { currentPath: string } ) {
     const active = baseClassMenuItem + "text-white bg-orange-400"
     const inActive = baseClassMenuItem + "text-black bg-gray-50"
 
-    const base = "/BasicTools"
     return (
         <>
             <div className="flex justify-end w-full py-2">
