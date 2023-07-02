@@ -1,5 +1,5 @@
 ---
-import Menu from '../components/Menu.astro';
+import Menu from '../react-components/Menu';
 
 export interface Props {
 	title: string,
@@ -20,26 +20,8 @@ const { title, hideMenu } = Astro.props;
 		<meta name="generator" content={Astro.generator} />
 		<title>{title}</title>
 	</head>
-	<body class="flex">
-        {!hideMenu && <aside class="overflow-y-auto hidden md:inline h-screen max-h-screen w-60 p-2"><Menu /></aside>}
-        <main class="flex justify-center grow">
-            <div class="w-full p-3">
-                <slot />
-            </div>
-        </main>
+	<body class="md:flex">
+        {!hideMenu && <aside class="w-full md:w-64"><Menu currentPath={Astro.url.pathname} client:idle /></aside>}
+        <main class="md:grow"><slot/></main>
 	</body>
 </html>
-<style is:global>
-	:root {
-		--accent: 124, 58, 237;
-		--accent-gradient: linear-gradient(45deg, rgb(var(--accent)), #da62c4 30%, white 60%);
-	}
-	html {
-		font-family: system-ui, sans-serif;
-		background-color: #f0eaea;
-	}
-	code {
-		font-family: Menlo, Monaco, Lucida Console, Liberation Mono, DejaVu Sans Mono,
-			Bitstream Vera Sans Mono, Courier New, monospace;
-	}
-</style>
