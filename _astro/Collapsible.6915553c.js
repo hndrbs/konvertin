@@ -1,1 +1,0 @@
-import{r as o}from"./index.ed373d49.js";import{j as e}from"./jsx-runtime.391947bd.js";function d({text:r,children:i,classNames:s}){const[t,l]=o.useState(!1);return e.jsxs("div",{className:"relative",children:[e.jsx("button",{className:s.text,onClick:()=>l(!t),children:r}),e.jsx("div",{className:t?s.children:"hidden",children:i})]})}export{d as default};
