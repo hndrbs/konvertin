@@ -26,8 +26,8 @@ export default function Menu({ currentPath }: { currentPath: string } ) {
             <div className="flex justify-end w-full py-2">
                 <button className="md:hidden" onClick={() => setIsOpen(!isOpen)}>
                     {isOpen
-                        ? <img className="h-8 w-8" src="/close.svg" />
-                        : <img className="h-8 w-8" src="/bars-4.svg" />
+                        ? <img className="h-8 w-8" src={base + "/close.svg"} />
+                        : <img className="h-8 w-8" src={base + "/bars-4.svg"} />
                     }
                 </button>
             </div>

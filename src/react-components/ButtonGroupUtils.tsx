@@ -41,11 +41,11 @@ export default function ButtonGroupUtils({ refTarget, buttonMembers }: IButtonUt
     return (
         <div className="w-full flex justify-end gap-2 bg-gray-200 rounded-md">
             {
-                buttonMembers.map(btnType => {
+                buttonMembers.map((btnType, id) => {
                     switch (btnType) {
                         case "clear":
                             return (
-                                <button 
+                                <button key={id}
                                     onClick={onClear} type="button" 
                                     className="bg-gray-500 text-white py-1 px-2 rounded-md">
                                     {textButtonClear}
@@ -53,7 +53,7 @@ export default function ButtonGroupUtils({ refTarget, buttonMembers }: IButtonUt
                             )
                         case "copy":
                             return (
-                                <button 
+                                <button key={id}
                                     onClick={onCopy} type="button" 
                                     className="bg-gray-500 text-white py-1 px-2 rounded-md">{textButtonCopy}</button>
                             )
