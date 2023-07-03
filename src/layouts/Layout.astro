@@ -21,7 +21,7 @@ const { title, hideMenu } = Astro.props;
 		<title>{title}</title>
 	</head>
 	<body class="md:flex">
-        {!hideMenu && <aside class="w-full md:w-64"><Menu currentPath={Astro.url.pathname} client:idle /></aside>}
-        <main class="md:grow"><slot/></main>
+        {!hideMenu && <aside class="w-full md:w-64"><Menu currentPath={Astro.url.pathname} client:load /></aside>}
+        <main class="md:grow p-10"><slot/></main>
 	</body>
 </html>

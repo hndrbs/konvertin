@@ -1,4 +1,7 @@
 import { useState, type ReactNode } from "react";
+// import { basePath } from "../../astro.config.mjs";
+
+const basePath = import.meta.env.BASE_URL
 
 
 interface ICollapsibleProps {
@@ -18,8 +21,8 @@ export default function Collapsible({ text, children, classNames  }: ICollapsibl
     
     return (
         <div className="relative">
-            <button className={classNames.text} onClick={() => setShowChildren(!showChildren)}>
-                {text}
+            <button className={"flex justify-between " + classNames.text} onClick={() => setShowChildren(!showChildren)} type="button">
+                {text} <img alt="chevron up" className={`${showChildren && "rotate-180"} h-4 w-4 mr-3`} src={basePath + "/chevron-up.svg"} />
             </button>
             <div className={showChildren ? classNames.children: "hidden"}>
                 {children}

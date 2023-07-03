@@ -18,7 +18,7 @@ const regularMenu: IMenuSetting[] = [
 
 
 export const menuSettings: (IGroupedMenuSetting | IMenuSetting)[]  = [
-    { name: "Home", link: "/" },
+    { name: "Home", link: "" },
     base64Menu, 
     ...regularMenu
 ]
