@@ -1,24 +1,14 @@
 import type { IGroupedMenuSetting, IMenuSetting } from "./interfaces";
 
-
-
-const base64Menu: IGroupedMenuSetting = {
-    name: "Base64",
-    children: [
-        // { name: "base64 - text", "link": "/base64/text" },
-        { name: "base64 - text", "link": "/base64/text" },
-        { name: "base64 - file", "link": "/coming-soon" }
-    ]
-}
-
-
-const regularMenu: IMenuSetting[] = [
-    { name: "JWT", link: "/coming-soon" },
-]
-
+const queryStringMenu =  { 
+    name: "Query String", parentLink: "/query-string",  children: [
+        { name: "Parse", "link": "/parse" },
+        { name: "Generate", "link": "/generate" },
+]}
 
 export const menuSettings: (IGroupedMenuSetting | IMenuSetting)[]  = [
     { name: "Home", link: "" },
-    base64Menu, 
-    ...regularMenu
+    { name: "Base64", "link": "/base64" },
+    queryStringMenu
+
 ]

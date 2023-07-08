@@ -6,5 +6,6 @@ export interface IMenuSetting {
 
 export interface IGroupedMenuSetting {
     name: string,
+    parentLink: string,
     children: IMenuSetting[]
 }
