@@ -1,9 +1,11 @@
 ---
+import PageWords from "../components/PageWords.astro";
 import Layout from "../layouts/Layout.astro";
 import Base64TextConverter from "../react-pages/Base64TextConverter"
 ---
 
 
 <Layout title="base64 converter">
+    <PageWords words="Encode/Decode base64 string"/>
     <Base64TextConverter client:load />
 </Layout>

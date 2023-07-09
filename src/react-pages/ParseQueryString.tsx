@@ -1,4 +1,4 @@
-import { useRef, useState } from "react"
+import { SyntheticEvent, useRef, useState } from "react"
 
 
 interface IResult {
@@ -12,10 +12,10 @@ interface IViewResultProps {
 function TableViewResult({ data } : IViewResultProps) {
     return (<>
         <div className="w-full overflow-y-auto">
-            <table className="table-fixed">
-                <thead className="bg-orange-600 text-white py-2 rounded">
-                   <tr>
-                        <th className="w-1/4">Key</th>
+            <table className="table-fixed w-full"> 
+                <thead className="bg-orange-600 text-white rounded">
+                   <tr className="py-4 w-full text-left">
+                        <th className="max-w-[100px] w-1/4">Key</th>
                         <th>Value</th>
                    </tr>
                 </thead>
@@ -25,7 +25,7 @@ function TableViewResult({ data } : IViewResultProps) {
                         const value = datum[key]
                         return (
                             <tr key={id} className="border-2 hover:bg-orange-50">
-                                <td className="whitespace-normal p-2 break-all min-w-fit">{key}</td>
+                                <td className="whitespace-normal p-2 break-all min-w-fit border-r-2 border-gray-300">{key}</td>
                                 <td className="whitespace-normal p-2 break-all">{value}</td>
                             </tr>
                         )
@@ -73,6 +73,20 @@ export default function ParseQueryString() {
         setResult(tempResult)
     }
 
+    function onCopy(e: SyntheticEvent) {
+        navigator.clipboard.writeText(JSON.stringify(result, null, 4))
+            .then(() => {
+                const button = e.target as HTMLButtonElement
+                const initialText = button.innerText
+                button.innerText = "Copied !"
+
+                setTimeout(() => { button.innerText = initialText } , 3000)
+            })
+            .catch((error) => {
+                console.error('Error copying text to clipboard:', error);
+            });
+    }
+
     return (<>
         <div className="w-full flex justify-center">
             <div className="w-full">
@@ -90,6 +104,9 @@ export default function ParseQueryString() {
                 <div className="flex my-2 justify-between p-0">
                     <button type="button" onClick={() => setViewerType("json")} className={viewerType === "json" ? active: inActive}>JSON</button>
                     <button type="button" onClick={() => setViewerType("table")} className={viewerType === "table" ? active: inActive}>Table</button>
+                </div>
+                <div className="bg-gray-100 flex justify-end p-0">
+                    <button onClick={onCopy} className="bg-gray-400 text-white p-1 rounded-md">Copy JSON</button>
                 </div>
                 { viewerType === "json" && <JsonViewResult data={result}   /> }
                 { viewerType === "table" && <TableViewResult data={result}  /> }
