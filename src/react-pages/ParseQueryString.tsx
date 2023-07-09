@@ -12,11 +12,11 @@ interface IViewResultProps {
 function TableViewResult({ data } : IViewResultProps) {
     return (<>
         <div className="w-full overflow-y-auto">
-            <table className="table-fixed w-full"> 
+            <table className="w-full border-spacing-1"> 
                 <thead className="bg-orange-600 text-white rounded">
                    <tr className="py-4 w-full text-left">
-                        <th className="max-w-[100px] w-1/4">Key</th>
-                        <th>Value</th>
+                        <th className="max-w-[100px] w-1/4 px-1 py-2">Key</th>
+                        <th className="px-1 py-2">Value</th>
                    </tr>
                 </thead>
                 <tbody>
@@ -37,11 +37,24 @@ function TableViewResult({ data } : IViewResultProps) {
 }
 
 function JsonViewResult({ data }: IViewResultProps) {
+    const result = convertToSimpleObject(data)
     return (<>
-        <div className="w-full overflow-y-auto break-all bg-gray-50 p-2">
-            {JSON.stringify(data, null, 1)}
+        <div className="w-full overflow-auto bg-gray-50 p-2 max-w-full">
+            <pre className="whitespace-wrap">
+                {JSON.stringify(result, null, 4)}
+            </pre>
         </div>
     </>)
+}
+
+
+function convertToSimpleObject(data: IResult[]) {
+   let simpleObject = {}
+   for(let obj of  data) {
+        simpleObject = { ...simpleObject ,...obj}
+   }
+
+   return simpleObject
 }
 
 
@@ -71,10 +84,14 @@ export default function ParseQueryString() {
             tempResult.push({ [key]: value })
         }
         setResult(tempResult)
+        
+        if(!tempResult.length) {
+            setWarningText("Query strings not found")
+        }
     }
 
     function onCopy(e: SyntheticEvent) {
-        navigator.clipboard.writeText(JSON.stringify(result, null, 4))
+        navigator.clipboard.writeText(JSON.stringify(convertToSimpleObject(result), null, 4))
             .then(() => {
                 const button = e.target as HTMLButtonElement
                 const initialText = button.innerText
@@ -87,14 +104,24 @@ export default function ParseQueryString() {
             });
     }
 
+    function onClear() {
+        if (!inputElementRef.current) return
+        inputElementRef.current.value = ""
+    }
+
     return (<>
         <div className="w-full flex justify-center">
             <div className="w-full">
+                <div className="flex justify-end">
+                    <button
+                        onClick={onClear} 
+                        className="bg-gray-100 rounded-md p-2">Clear</button>
+                </div>
                 <input
                     type="url"
                     ref={inputElementRef} placeholder="put your url here"
-                    className="w-full mb-3 h-12 rounded-sm border-2 border-orange-400 p-3 block"/>
-                <p className="text-red-500"><small>{warningText}</small></p>
+                    className="w-full h-12 rounded-sm border-2 border-orange-400 p-3 block"/>
+                <p className="text-red-500 mt-1 mb-3"><small>{warningText}</small></p>
                 <button className="bg-orange-500 rounded-md text-white w-full block p-2" onClick={onParse}>Parse</button>
             </div>
         </div>
@@ -105,7 +132,7 @@ export default function ParseQueryString() {
                     <button type="button" onClick={() => setViewerType("json")} className={viewerType === "json" ? active: inActive}>JSON</button>
                     <button type="button" onClick={() => setViewerType("table")} className={viewerType === "table" ? active: inActive}>Table</button>
                 </div>
-                <div className="bg-gray-100 flex justify-end p-0">
+                <div className="bg-gray-100 flex justify-end p-0 my-2">
                     <button onClick={onCopy} className="bg-gray-400 text-white p-1 rounded-md">Copy JSON</button>
                 </div>
                 { viewerType === "json" && <JsonViewResult data={result}   /> }
