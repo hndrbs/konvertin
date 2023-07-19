@@ -58,7 +58,7 @@ function convertToSimpleObject(data: IResult[]) {
 }
 
 
-const baseClassMenuItem = "p-2 rounded block w-full hover:text-white hover:bg-orange-400 "
+const baseClassMenuItem = "p-2 rounded block w-full border border-orange-400 "
 const active = baseClassMenuItem + "text-white bg-orange-400"
 const inActive = baseClassMenuItem + "text-black bg-gray-50"
 
@@ -122,13 +122,13 @@ export default function ParseQueryString() {
                     ref={inputElementRef} placeholder="put your url here"
                     className="w-full h-12 rounded-sm border-2 border-orange-400 p-3 block"/>
                 <p className="text-red-500 mt-1 mb-3"><small>{warningText}</small></p>
-                <button className="bg-orange-500 rounded-md text-white w-full block p-2" onClick={onParse}>Parse</button>
+                <button className="bg-orange-500 rounded-md text-white w-full sm:w-32 block p-2 sm:ml-auto" onClick={onParse}>Parse</button>
             </div>
         </div>
         <div className="mt-3">
             <div className={`${result.length === 0 && "hidden"} w-full`}>
                 <h3> Result: </h3>
-                <div className="flex my-2 justify-between p-0">
+                <div className="flex my-2 justify-between p-0 gap-2 w-full sm:w-1/2 sm:ml-auto">
                     <button type="button" onClick={() => setViewerType("json")} className={viewerType === "json" ? active: inActive}>JSON</button>
                     <button type="button" onClick={() => setViewerType("table")} className={viewerType === "table" ? active: inActive}>Table</button>
                 </div>

@@ -3,7 +3,7 @@ import type { IMenuSetting } from "../interfaces"
 import Collapsible from '../react-components/Collapsible';
 import { useState } from 'react';
 
-const baseClassMenuItem = "p-2 rounded m-2 block w-full hover:text-white hover:bg-orange-400 "
+const baseClassMenuItem = "p-2 rounded m-2 block w-full "
 const active = baseClassMenuItem + "text-white bg-orange-400"
 const inActive = baseClassMenuItem + "text-black bg-gray-50"
 

@@ -1,7 +1,7 @@
 import { SyntheticEvent, useRef, useState } from "react"
 
 
-const baseClassMenuItem = "p-2 rounded m-2 block w-full hover:bg-orange-100 hover:text-black "
+const baseClassMenuItem = "p-2 rounded m-2 block w-full "
 const active = baseClassMenuItem + "text-white bg-orange-400"
 const inActive = baseClassMenuItem + "text-black bg-gray-50"
 
@@ -84,7 +84,7 @@ export default function Base64TextConverter() {
                 <button type="button" onClick={() => onTaskChange("encrypt")} className={task === "encrypt" ? active: inActive}>Encode</button>
                 <button type="button" onClick={() => onTaskChange("decrypt")} className={task === "decrypt" ? active: inActive}>Decode</button>
             </div>
-            <div className="flex flex-col justify-center md:flex-row gap-3 w-full">
+            <div className="flex flex-col justify-center sm:flex-row gap-3 w-full">
                 <div className="w-full md:w-1/2">
                     <div className="w-full flex justify-end gap-2 bg-gray-200 rounded-md">
                         <button 
