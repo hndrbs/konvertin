@@ -1,8 +1,10 @@
 ---
-import ComingSoon from "../../components/ComingSoon.astro"
+import PageWords from "../../components/PageWords.astro";
 import Layout from "../../layouts/Layout.astro";
+import GenerateQuerySting from "../../react-pages/GenerateQueryString";
 ---
 
-<Layout title="Query String" hideMenu>
-    <ComingSoon/>
+<Layout title="Query String">
+    <PageWords words="Query string generator"/>
+    <GenerateQuerySting client:load/>
 </Layout>   
